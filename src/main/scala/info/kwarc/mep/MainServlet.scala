@@ -6,12 +6,8 @@ import scalate.ScalateSupport
 class MainServlet extends MepStack {
 
   get("/") {
-    <html>
-      <body>
-        <h1>Hello, world!</h1>
-        Say <a href="hello-scalate">hello to Scalate</a>.
-      </body>
-    </html>
+  	contentType="text/html"
+    jade("/index", "layout" -> "WEB-INF/templates/layouts/default.jade", "title" -> "Main | MEP")
   }
 
 }
