@@ -10,6 +10,7 @@ html
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
     link(type="text/css" rel="stylesheet" href="/css/footer.css")
     link(type="text/css" rel="stylesheet" href="/css/editor.css")
+    script(src="/scripts/mep-query.js")
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
     #wrapper
@@ -36,4 +37,6 @@ html
         .container-fluid.col-xs-18.col-md-12
           != body
       #footer.navbar-inverse
-        .container-fluid
+        center
+          a.foorlink(href="http://kwarc.info/")
+            img(src="/img/kwarc_logo.png" alt="KWARC research group" style="padding-top:3px;")
