@@ -4,6 +4,8 @@
 
 #editor {
 	height: 100%;
+	border:2px solid #919191;
+	margin: 10px;
 }
 
 #editor textarea {
@@ -13,4 +15,11 @@
    	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+#presenter {
+	min-height: 555px;
+	border:2px solid #919191;
+	margin: 10px;
+	margin-left: 30px;
 }

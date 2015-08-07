@@ -1,11 +1,13 @@
 #editor.col-md-6
   #control-panel
   .form-group
-    label(for="text-type") Input type:
+    label(for="text-type") Text format:
     select.form-control#text-type
       option OEIS
   .form-group
-    textarea.form-control#input(rows="22")
-    span.input-group-addon.btn.btn-primary.btn-group-sm Present
-#presenter.col-md-6
+    textarea.form-control#input(rows="21")
+    span.input-group-addon.btn-default(onclick="present()") 
+      | PRESENT
+      span.glyphicon.glyphicon-play(area-hidden="true")
+#presenter.col-md-5
   #output
