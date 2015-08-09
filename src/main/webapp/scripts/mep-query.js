@@ -37,8 +37,14 @@ var mepq = {
 	},
 };
 
-function present() {
-	var text = XML.elem("oeis", $("#input").val());
-	cont = function(result) {$("#presenter").html(result);};
-	mepq.exec(text,cont);
+var controlPanel = {
+	getTextFormat: function() {
+		return $("#text-type").val();
+	},
+
+	getPresentation: function() {
+		var text = XML.elem(this.getTextFormat(), $("#input").val());
+		cont = function(result) {$("#presenter").html(result);};
+		mepq.exec(text,cont);
+	},
 };
