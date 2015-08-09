@@ -13,30 +13,29 @@ html
     script(src="/scripts/mep-query.js")
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
-    #wrapper
-      #header
-        .navbar.navbar-inverse.navbar-static-top
-          .container-fluid
-            .navbar-header
-              button(
-                type="button" 
-                class="navbar-toggle collapsed" 
-                data-toggle="collapse" 
-                data-target="#navbar" 
-                aria-expanded="false") 
-                span(class="sr-only") Toggle navigation
-                span(class="icon-bar")
-                span(class="icon-bar")
-                span(class="icon-bar")
-              a(class="navbar-brand" href="#") MEP
-            #navbar.collapse.navbar-collapse
-              ul(class="nav navbar-nav")
-                li(class="active")
-                  a(href="/") Home
-      #content
-        .container-fluid.col-xs-18.col-md-12
-          != body
-      #footer.navbar-inverse
+    #header
+      .navbar.navbar-inverse.navbar-static-top
+        .container-fluid
+          .navbar-header
+            button(
+              type="button" 
+              class="navbar-toggle collapsed" 
+              data-toggle="collapse" 
+              data-target="#navbar" 
+              aria-expanded="false") 
+              span(class="sr-only") Toggle navigation
+              span(class="icon-bar")
+              span(class="icon-bar")
+              span(class="icon-bar")
+            a(class="navbar-brand" href="#") MEP
+          #navbar.collapse.navbar-collapse
+            ul(class="nav navbar-nav")
+              li(class="active")
+                a(href="/") Home
+    #content.col-xs-18.col-md-12
+      != body
+    footer.footer.navbar-inverse.col-xs-18.col-md-12
+      .container
         center
-          a.foorlink(href="http://kwarc.info/")
+          a.footlink(href="http://kwarc.info/")
             img(src="/img/kwarc_logo.png" alt="KWARC research group" style="padding-top:3px;")

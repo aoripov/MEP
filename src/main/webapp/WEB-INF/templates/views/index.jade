@@ -3,10 +3,10 @@
   .form-group
     label(for="text-type") Text format:
     select.form-control#text-type
-      option OEIS
+      option(value="oeis") OEIS
   .form-group
     textarea.form-control#input(rows="21")
-    span.input-group-addon.btn-default(onclick="present()") 
+    span.input-group-addon.btn-default(onclick="controlPanel.getPresentation()") 
       | PRESENT
       span.glyphicon.glyphicon-play(area-hidden="true")
 #presenter.col-md-5

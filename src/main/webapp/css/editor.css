@@ -22,4 +22,6 @@
 	border:2px solid #919191;
 	margin: 10px;
 	margin-left: 30px;
+	/* Margin bottom by footer height +10px*/
+	margin-bottom: 90px;
 }
