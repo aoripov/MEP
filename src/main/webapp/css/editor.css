@@ -18,10 +18,19 @@
 }
 
 #presenter {
-	min-height: 555px;
+	height: 555px;
 	border:2px solid #919191;
 	margin: 10px;
 	margin-left: 30px;
 	/* Margin bottom by footer height +10px*/
 	margin-bottom: 90px;
+	overflow-x:hidden; overflow-y: scroll;
+}
+
+math {
+	background: yellow;
+}
+
+.math {
+	background: yellow;
 }
