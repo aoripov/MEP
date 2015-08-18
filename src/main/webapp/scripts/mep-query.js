@@ -46,6 +46,6 @@ var controlPanel = {
 		var text = XML.elem(this.getTextFormat(), $("#input").val());
 		cont = function(result) {$("#presenter").html(result);};
 		mepq.exec(text,cont);
-		setTimeout(function() {MathJax.Hub.Queue(["Typeset",MathJax.Hub, "presenter"]);}, 100);
+		setTimeout(function() {MathJax.Hub.Queue(["Typeset",MathJax.Hub, "presenter"]);}, 500);
 	},
 };
