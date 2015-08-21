@@ -66,7 +66,7 @@ jrebel.lic
 .idea
 
 # paulp script
-/.lib/
+#/.lib/
 
 # Compiled source #
 ###################
@@ -106,3 +106,6 @@ jrebel.lic
 ehthumbs.db
 Thumbs.db
 /bin/
+
+# include sbt-launch
+!/.lib/*/sbt-launch.jar
