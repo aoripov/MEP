@@ -17,7 +17,9 @@ var XML = {
 	},
 };
 
-// functions to build and run MEP queries
+/**
+ * Functions to query for presentation
+ */
 var mepq = {
 	base_url : function() {
 		return document.location.origin;
@@ -37,6 +39,7 @@ var mepq = {
 	},
 };
 
+
 var controlPanel = {
 	getTextFormat: function() {
 		return $("#text-type").val();
@@ -46,6 +49,33 @@ var controlPanel = {
 		var text = XML.elem(this.getTextFormat(), $("#input").val());
 		cont = function(result) {$("#presenter").html(result);};
 		mepq.exec(text,cont);
-		setTimeout(function() {MathJax.Hub.Queue(["Typeset",MathJax.Hub, "presenter"]);}, 500);
+		// in case Chrome and MathJax defined regenerate MathML
+		if (typeof MathJax != 'undefined') {
+			setTimeout(function() {MathJax.Hub.Queue(["Typeset",MathJax.Hub, "presenter"]);}, 500);
+		}
 	},
 };
+
+
+/**
+ * @param from string Class to toggle from
+ * @param to string Class to toggle to
+ */
+$.fn.toggleClasses = function(from, to) {
+	if (this.hasClass(from)) {
+		this.removeClass(from);
+		this.addClass(to);
+	} else if (this.hasClass(to)) {
+		this.removeClass(to);
+		this.addClass(from);
+	}
+};
+
+/**
+ * Funtionality of full width buttons
+ */
+function fullWidth() {
+	$("#editor-window").toggleClasses("col-md-6", "col-md-12");
+	$("#presenter-window").toggleClasses("col-md-6", "col-md-12");
+	$('.fl-width').children('.glyphicon').toggleClasses("glyphicon-chevron-right", "glyphicon-chevron-left");
+}
