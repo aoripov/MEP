@@ -4,7 +4,9 @@
       b Editor
       button.btn.btn-default.btn-xs.pull-right.fl-width(type="button" onclick='fullWidth();')
         span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
-    .panel-body
+      button.btn.btn-default.btn-xs.pull-right(type="button" onclick='hidePanel("#edit-body", $(this));')
+        span.glyphicon.glyphicon-chevron-up(aria-hidden="true")
+    .panel-collapse.in#edit-body
       #control-panel
       .form-group
         label(for="text-type") Text format:
@@ -21,6 +23,8 @@
       b Presenter
       button.btn.btn-default.btn-xs.pull-right.fl-width(type="button" onclick='fullWidth();')
         span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
-    .panel-body
+      button.btn.btn-default.btn-xs.pull-right(type="button" onclick='hidePanel("#present-body", $(this));')
+        span.glyphicon.glyphicon-chevron-up(aria-hidden="true")
+    .panel-collapse.in#present-body
       #presenter
         #output

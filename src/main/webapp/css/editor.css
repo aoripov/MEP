@@ -3,8 +3,6 @@
 }
 
 #editor {
-	height: 100%;
-	margin: 10px;
 }
 
 #editor textarea {
@@ -29,4 +27,8 @@ math {
 
 .math {
 	background: yellow;
+}
+
+.panel-collapse {
+	padding: 10px;
 }

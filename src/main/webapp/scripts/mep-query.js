@@ -79,3 +79,8 @@ function fullWidth() {
 	$("#presenter-window").toggleClasses("col-md-6", "col-md-12");
 	$('.fl-width').children('.glyphicon').toggleClasses("glyphicon-chevron-right", "glyphicon-chevron-left");
 }
+
+function hidePanel(panel_body, me) {
+	$(panel_body).collapse('toggle');
+	me.children('.glyphicon').toggleClasses("glyphicon-chevron-up", "glyphicon-chevron-down");
+}
