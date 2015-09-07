@@ -9,7 +9,7 @@ import info.kwarc.mmt.oeis._
 
 class MMTBackend {
   val controller = new Controller()
-  controller.extman.addExtension("info.kwarc.mmt.oeis.OEISImporter", List("/home/akbar/MMT/src/mmt-oeis/resources/dictionary"))
+  controller.extman.addExtension("info.kwarc.mmt.oeis.OEISImporter", List("src/main/resources/dictionary"))
   controller.extman.addExtension("info.kwarc.mmt.planetary.PlanetaryPresenter", Nil)
   controller.extman.addExtension("info.kwarc.mmt.oeis.OEISPresenter", Nil)
   
