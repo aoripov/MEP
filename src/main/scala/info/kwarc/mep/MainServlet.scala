@@ -17,7 +17,7 @@ class MainServlet extends MepStack {
   	contentType="html"
   	response match {
   		case <oeis>{content}</oeis> =>
-        val pres = backend.getPresentation(content.toString, "oeis-omdoc")   
+        val (pres, errors) = backend.getPresentation(content.toString, "oeis-omdoc")
         pres
   		case r => <b>No presentation {r}</b>
   	}

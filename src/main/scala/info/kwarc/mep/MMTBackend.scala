@@ -18,7 +18,7 @@ class MMTBackend {
    * @param format Text format
    * @param presenter Presenter for output
    */
-  def getPresentation(text : String, format : String, presenter : String = "oeis-pres") : String = try {
+  def getPresentation(text : String, format : String, presenter : String = "oeis-pres") : (String, List[Error]) = try {
     val comp = controller.extman.get(classOf[OEISImporter]).find{
         _.isApplicable(format)
       }.getOrElse(throw new Exception("No importer found"))    
@@ -30,12 +30,12 @@ class MMTBackend {
     val dpath = Path.parseD("http://oeis.org/new", NamespaceMap.empty)
     val errHandler = new ErrorContainer(None)
     val doc = comp.translateText(text)(dpath, errHandler)
-    
+    val errors = errHandler.getErrors
     val rb = new StringBuilder
     pres(doc)(rb)
-    rb.get
+    (rb.get, errors)
   } catch {
-    case e : Exception => e.getMessage + "\n" + e.getStackTraceString
+    case e : Exception => (e.getMessage + "\n" + e.getStackTraceString, Nil)
   }
   
 }
