@@ -18,7 +18,7 @@ var XML = {
 };
 
 /**
- * Functions to query for presentation
+ * Functions to query for presentation and errors
  */
 var mepq = {
 	base_url : function() {
@@ -29,6 +29,10 @@ var mepq = {
 		return this.base_url() + path;
 	},
 
+	/**
+	 * @param q string Data to post
+	 * @param cont fuction Function to process server response
+	 */ 
 	exec: function(q, cont) {
 		var qURL = this.queryURL('/query');
 		$.ajax({
@@ -36,6 +40,51 @@ var mepq = {
 			type:'POST',
 			data:{data: q},
 		}).done(cont);
+	},
+
+	/**
+	 * @param response string Errors and presentation as XML
+	 * @return object Object with presentation and errors
+	 */
+	parseServerResponse : function(response) {
+		var pres = $(response).find("presentation").first().html();
+		var errors = $(response).find("error");
+		var out = {};
+		console.log(response);
+		out['presentation'] = pres;
+		out['errors'] = '<ul>';
+		$.each(errors, function(key, error) {
+			out['errors'] += '<li>';
+			var level = $(error).attr('level');
+			var srcref = $(error).attr('srcref');
+			var shortmsg = $(error).find('shortmsg').html();
+			out['errors'] += '<p>';
+			out['errors'] += XML.elem('u', 
+				typeof mepq.error_map[level] != 'undefined' ? mepq.error_map[level] : 'Info', 
+				'style', 
+				'color:' + (typeof mepq.color_map[level] != 'undefined' ? mepq.color_map[level] : '#9999FF')
+			);
+			out['errors'] += " " + shortmsg;
+			out['errors'] += '</p>';
+			out['errors'] += '</li>';
+		});	
+		out['errors'] += '</ul>';
+		console.log(out);
+		return out;
+	},
+
+	color_map : {
+		'0' : '#9999FF', 
+		'1' : "#BBBB11", 
+		'2' : "#FF6666", 
+		'3' : "#FF2222",
+	},
+
+	error_map : {
+		'0' : 'Info',
+		'1' : 'Warning',
+		'2' : 'Error',
+		'3' : 'Fatal',
 	},
 };
 
@@ -45,10 +94,17 @@ var controlPanel = {
 		return $("#text-type").val();
 	},
 
+	/**
+	 * Get presentation from the server
+	 */
 	getPresentation: function() {
 		var text = XML.elem(this.getTextFormat(), $("#input").val());
-		cont = function(result) {$("#presenter").html(result);};
-		mepq.exec(text,cont);
+		cont = function(result) {
+			var response = mepq.parseServerResponse(result);
+			$("#presenter").html(response['presentation']);
+			$("#error-body").html(response['errors']);
+		};
+-       mepq.exec(text,cont);
 		// in case Chrome and MathJax defined regenerate MathML
 		if (typeof MathJax != 'undefined') {
 			setTimeout(function() {MathJax.Hub.Queue(["Typeset",MathJax.Hub, "presenter"]);}, 500);
