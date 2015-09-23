@@ -21,7 +21,7 @@ class MainServlet extends MepStack {
   	response match {
   		case <oeis>{content}</oeis> =>
         var (pres, errors) = backend.getPresentation(content.toString, "oeis-omdoc")
-        errors.sortWith(_.level > _.level)
+        errors = errors.sortWith((x,y) => x.level > y.level)
         <result>
 					<presentation>{scala.xml.XML.loadString(pres)}</presentation>{convertErrors.toXML(errors)}
 				</result>
