@@ -9,4 +9,4 @@ $ ./sbt
 > browse
 ```
 
-If `browse` doesn't launch your browser, manually open [http://localhost:8080/](http://localhost:8080/) in your browser.
+If `browse` doesn't launch your browser, manually open [http://localhost:9090/](http://localhost:9090/) in your browser. You  can change the port by changing the value of the jetty port in `build.sbt`
