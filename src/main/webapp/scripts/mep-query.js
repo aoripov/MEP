@@ -140,3 +140,17 @@ function hidePanel(panel_body, me) {
 	$(panel_body).collapse('toggle');
 	me.children('.glyphicon').toggleClasses("glyphicon-chevron-up", "glyphicon-chevron-down");
 }
+
+examples = {
+	"0" : "",
+	"1" : "%F A000045 F(n) = ((1+sqrt(5))^n-(1-sqrt(5))^n)/(2^n*sqrt(5)).",
+	"2" : "%F A001147 a(n) = a(n-1)*(2*n-1) = (2*n)!/(n!*2^n) = A010050(n)/A000165(n).",
+	"3" : "%F A000055 G.f.: A(x) = 1 + T(x) - T^2(x)/2 + T(x^2)/2, where T(x) = x + x^2 + 2*x^3 + ... is the g.f. for A000081.",
+};
+
+$(function() {
+  $('#example').change(function() {
+     $('#input').val(examples[$('#example').val()]);
+     controlPanel.getPresentation();	
+  });
+ });

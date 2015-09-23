@@ -12,6 +12,12 @@
         label(for="text-type") Text format:
         select.form-control#text-type
           option(value="oeis") OEIS
+        label(for="text-type") Examples:
+        select.form-control#example
+          option(value="0") example
+          option(value="1") Fibonacci
+          option(value="2") Double factorial of odd numbers
+          option(value="3") Number of trees with n unlabeled nodes. 
       .form-group
         textarea.form-control#input(rows="21")
         span.input-group-addon.btn-default(onclick="controlPanel.getPresentation()") 
