@@ -29,7 +29,7 @@ class MMTBackend {
     
     val dpath = Path.parseD("http://oeis.org/new", NamespaceMap.empty)
     val errHandler = new ErrorContainer(None)
-    val doc = comp.translateText(text)(dpath, errHandler)
+    val (doc, omdoc) = comp.translateText(text)(dpath, errHandler)
     val errors = errHandler.getErrors
     val rb = new StringBuilder
     pres(doc)(rb)
