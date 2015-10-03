@@ -9,10 +9,18 @@ class convertErrors {
    * @return XML presentation of the error
    */
   def toXML(error: Error): scala.xml.Elem = {
-    <error level={error.level.toString} srcref={""}>
-			<shortmsg>{error.toString()}</shortmsg>
-			<longmsg>{error.extraMessage}</longmsg>
-		</error>  
+    error match {
+      case e:SourceError =>
+        <error level={e.level.toString} srcref={e.ref.toString}>
+          <shortmsg>{e.toString()}</shortmsg>
+          <longmsg>{e.extraMessage.toString}</longmsg>
+        </error>
+      case e:Error =>  
+        <error level={e.level.toString}>
+          <shortmsg>{e.toString()}</shortmsg>
+          <longmsg>{e.extraMessage.toString}</longmsg>
+        </error>  
+    }
   }
   
   /**

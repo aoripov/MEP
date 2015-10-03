@@ -68,13 +68,13 @@ var mepq = {
 		$.each(errors, function(key, error) {
 			out['errors'] += '<li>';
 			var level = $(error).attr('level');
-			var srcref = $(error).attr('srcref');
+			var srcref = $(error).attr('srcref') ? "  at " + $(error).attr('srcref') : "";
 			var shortmsg = $(error).find('shortmsg').html();
 			out['errors'] += '<p>';
 			out['errors'] += XML.elem('u', 
-				typeof mepq.error_map[level] != 'undefined' ? mepq.error_map[level] : 'Info', 
+				mepq.error_map[level] + srcref, 
 				'style', 
-				'color:' + (typeof mepq.color_map[level] != 'undefined' ? mepq.color_map[level] : '#9999FF')
+				'color:' + mepq.color_map[level]
 			);
 			out['errors'] += " " + shortmsg;
 			out['errors'] += '</p>';
