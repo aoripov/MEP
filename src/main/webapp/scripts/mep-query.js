@@ -44,14 +44,16 @@ var mepq = {
 
 	/**
 	 * @param q string Data to post
+	 * @param to string API path
 	 * @param cont fuction Function to process server response
 	 */ 
-	exec: function(q, cont) {
-		var qURL = this.queryURL('/query');
+	exec: function(q, to, cont) {
+		var qURL = this.queryURL('/api/' + to);
 		$.ajax({
-			url:qURL,
+			url: qURL,
 			type:'POST',
-			data:{data: q},
+			data: q,
+			contentType: false,
 		}).done(cont);
 	},
 
@@ -110,13 +112,14 @@ var controlPanel = {
 	 * Get presentation from the server
 	 */
 	getPresentation: function() {
-		var text = XML.elem(this.getTextFormat(), $("#input").val());
+		var text = $("#input").val();
+		var textFormat = this.getTextFormat();
 		cont = function(result) {
 			var response = mepq.parseServerResponse(result);
 			$("#presenter").html(response['presentation']);
 			$("#error-body").html(response['errors']);
 		};
--       mepq.exec(text,cont);
+-       mepq.exec(text, textFormat, cont);
 		// in case Chrome and MathJax defined regenerate MathML
 		if (typeof MathJax != 'undefined') {
 			setTimeout(function() {MathJax.Hub.Queue(["Typeset",MathJax.Hub, "presenter"]);}, 500);

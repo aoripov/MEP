@@ -3,6 +3,7 @@ package info.kwarc.mep
 import org.scalatra._
 import scalate.ScalateSupport
 import info.kwarc.mmt.api._
+import scala.xml.Utility
 
 
 class MainServlet extends MepStack {
@@ -15,18 +16,14 @@ class MainServlet extends MepStack {
     jade("/index", "layout" -> "WEB-INF/templates/layouts/default.jade", "title" -> "Main | MEP")
   }
 
-  post("/query") {
-  	val response = scala.xml.XML.loadString(params("data"));
+  post("/api/oeis") {
+  	val response = request.body
   	contentType="html"
-  	response match {
-  		case <oeis>{content}</oeis> =>
-        var (pres, errors) = backend.getPresentation(content.toString, "oeis-omdoc")
-        errors = errors.sortWith((x,y) => x.level > y.level)
-        <result>
-					<presentation>{scala.xml.XML.loadString(pres)}</presentation>{convertErrors.toXML(errors)}
-				</result>
-  		case r => <b>No presentation {r}</b>
-  	}
+    var (pres, errors) = backend.getPresentation(response, "oeis-omdoc")
+    errors = errors.sortWith((x,y) => x.level > y.level)
+    <result>
+			<presentation>{scala.xml.XML.loadString(pres)}</presentation>{convertErrors.toXML(errors)}
+		</result>
   }
 
 
