@@ -58,8 +58,8 @@ var mepq = {
 	},
 
 	/**
-	 * @param response string Errors and presentation as XML
-	 * @return object Object with presentation and errors {presentation:presentation, errors: errors}
+	 * @param response string Errors, OMDoc and presentation as XML
+	 * @return object Object with presentation and errors {presentation:presentation, errors: errors, omdoc:OMDoc}
 	 */
 	parseServerResponse : function(response) {
 		var pres = $(response).find("presentation").first().html();
@@ -83,6 +83,7 @@ var mepq = {
 			out['errors'] += '</li>';
 		});	
 		out['errors'] += '</ul>';
+		out['omdoc'] = $(response).find("omdoc").first().html();
 		console.log(out);
 		return out;
 	},
@@ -118,6 +119,7 @@ var controlPanel = {
 			var response = mepq.parseServerResponse(result);
 			$("#presenter").html(response['presentation']);
 			$("#error-body").html(response['errors']);
+			$("#omdoc-body").html('<pre>' + unescape(response['omdoc']) + '</pre>');
 		};
 -       mepq.exec(text, textFormat, cont);
 		// in case Chrome and MathJax defined regenerate MathML

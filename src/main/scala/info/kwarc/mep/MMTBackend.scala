@@ -18,7 +18,7 @@ class MMTBackend {
    * @param format Text format
    * @param presenter Presenter for output
    */
-  def getPresentation(text : String, format : String, presenter : String = "oeis-pres") : (String, List[Error]) = try {
+  def getPresentation(text : String, format : String, presenter : String = "oeis-pres") : (String, List[Error], xml.Node) = try {
     val comp = controller.extman.get(classOf[OEISImporter]).find{
         _.isApplicable(format)
       }.getOrElse(throw new Exception("No importer found"))    
@@ -33,9 +33,9 @@ class MMTBackend {
     val errors = errHandler.getErrors
     val rb = new StringBuilder
     pres(doc)(rb)
-    (rb.get, errors)
+    (rb.get, errors, omdoc)
   } catch {
-    case e : Exception => (e.getMessage + "\n" + e.getStackTraceString, Nil)
+      case e : Exception => (e.getMessage + "\n" + e.getStackTraceString, Nil, scala.xml.XML.loadString(""))
   }
   
 }

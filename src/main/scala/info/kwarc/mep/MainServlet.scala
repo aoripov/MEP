@@ -19,10 +19,11 @@ class MainServlet extends MepStack {
   post("/api/oeis") {
   	val response = request.body
   	contentType="html"
-    var (pres, errors) = backend.getPresentation(response, "oeis-omdoc")
+    var (pres, errors, omdoc) = backend.getPresentation(response, "oeis-omdoc")
     errors = errors.sortWith((x,y) => x.level > y.level)
     <result>
 			<presentation>{scala.xml.XML.loadString(pres)}</presentation>{convertErrors.toXML(errors)}
+      <omdoc>{omdoc.toString()}</omdoc>
 		</result>
   }
   
