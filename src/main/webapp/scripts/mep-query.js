@@ -125,6 +125,26 @@ var controlPanel = {
 			setTimeout(function() {MathJax.Hub.Queue(["Typeset",MathJax.Hub, "presenter"]);}, 500);
 		}
 	},
+
+	/**
+	 * Get raw source in OEIS text format by article ID
+	 */
+	loadArticle: function() {
+		var artID =  $("#artid").val();
+		var reg = new RegExp("^(A[0-9]+)$");
+		// check for validity of ID
+		if (reg.test(artID)) {
+			$("#in-artid").removeClass("has-error");
+			cont = function(result) {
+				$("#input").val(result);
+				controlPanel.getPresentation();
+			};
+			// query for source
+			mepq.exec(artID, "oeis/article", cont);
+		} else {
+			$("#in-artid").addClass("has-error");
+		}
+	},
 };
 
 

@@ -25,6 +25,19 @@ class MainServlet extends MepStack {
 			<presentation>{scala.xml.XML.loadString(pres)}</presentation>{convertErrors.toXML(errors)}
 		</result>
   }
+  
+  post("/api/oeis/article") {
+    val response = request.body
+    contentType="text"
+    val folder = response.substring(0, 4)
+    val fileURL = "https://gl.mathhub.info/oeis/oeis/raw/master/source/" + folder + "/" + response + ".txt"
+    // val fileURL = "http://oeis.org/search?q=id:" + response + "&fmt=text"
+    try {
+      scala.io.Source.fromURL(fileURL).mkString 
+    } catch {
+      case _ => "NO ARTICLE FOUND"
+    }
+  }
 
 
 }

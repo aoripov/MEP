@@ -7,22 +7,38 @@
       button.btn.btn-default.btn-xs.pull-right(type="button" onclick='hidePanel("#edit-body", $(this));')
         span.glyphicon.glyphicon-chevron-up(aria-hidden="true")
     .panel-collapse.in#edit-body
-      #control-panel
-      .form-group
-        label(for="text-type") Text format:
-        select.form-control#text-type
-          option(value="oeis") OEIS
-        label(for="text-type") Examples:
-        select.form-control#example
-          option(value="0") example
-          option(value="1") Fibonacci
-          option(value="2") Double factorial of odd numbers
-          option(value="3") Number of trees with n unlabeled nodes. 
-      .form-group
-        textarea.form-control#input(rows="21")
-        span.input-group-addon.btn-default(onclick="controlPanel.getPresentation()") 
-          | PRESENT
-          span.glyphicon.glyphicon-play(area-hidden="true")
+      #control-panel.row
+        .col-md-4
+          .input-group.input-group-sm
+            span.input-group-addon.input-group-addon-sm
+              | Text format
+            select.form-control#text-type
+              option(value="oeis") OEIS
+          br
+          .input-group.input-group-sm
+            span.input-group-addon
+              | Examples
+            select.form-control#example
+              option(value="0") example
+              option(value="1") Fibonacci
+              option(value="2") Double factorial of odd numbers
+              option(value="3") Number of trees with n unlabeled nodes. 
+        .col-md-4  
+          .input-group.input-group-sm#in-artid
+            span.input-group-addon
+              | Article ID
+            input.form-control#artid(type="text" class="form-control")
+            .input-group-btn
+              button.btn.btn-default(onclick="controlPanel.loadArticle()") 
+                | Load
+      br
+      .row
+        .col-md-12
+          .form-group
+            textarea.form-control#input(rows="21")
+            span.input-group-addon.btn-default(onclick="controlPanel.getPresentation()") 
+              | PRESENT
+              span.glyphicon.glyphicon-play(area-hidden="true")
 #presenter-window.col-md-6
   .panel.panel-default
     .panel-heading
