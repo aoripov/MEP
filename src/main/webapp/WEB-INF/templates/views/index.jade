@@ -14,21 +14,22 @@
               | Text format
             select.form-control#text-type
               option(value="oeis") OEIS
-          br
-          .input-group.input-group-sm
-            span.input-group-addon
-              | Examples
-            select.form-control#example
-              option(value="0") example
-              option(value="1") Fibonacci
-              option(value="2") Double factorial of odd numbers
-              option(value="3") Number of trees with n unlabeled nodes. 
         .col-md-4  
           .input-group.input-group-sm#in-artid
             span.input-group-addon
               | Article ID
             input.form-control#artid(type="text" class="form-control")
             .input-group-btn
+              button.btn.btn-default.btn-sm.dropdown-toggle(data-toggle="dropdown" type="button") 
+                | Examples
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href="#" onclick="example('A000045')") Fibonacci
+                li
+                  a(href="#" onclick="example('A001147')") Double factorial of odd numbers
+                li
+                  a(href="#" onclick="example('A000055')") Number of trees with n unlabeled nodes
               button.btn.btn-default(onclick="controlPanel.loadArticle()") 
                 | Load
       br

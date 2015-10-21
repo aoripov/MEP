@@ -120,12 +120,12 @@ var controlPanel = {
 			$("#presenter").html(response['presentation']);
 			$("#error-body").html(response['errors']);
 			$("#omdoc-body").html('<pre>' + unescape(response['omdoc']) + '</pre>');
+			// in case Chrome and MathJax defined regenerate MathML
+			if (typeof MathJax != 'undefined') {
+				setTimeout(function() {MathJax.Hub.Queue(["Typeset",MathJax.Hub, "presenter"]);}, 500);
+			}
 		};
--       mepq.exec(text, textFormat, cont);
-		// in case Chrome and MathJax defined regenerate MathML
-		if (typeof MathJax != 'undefined') {
-			setTimeout(function() {MathJax.Hub.Queue(["Typeset",MathJax.Hub, "presenter"]);}, 500);
-		}
+        mepq.exec(text, textFormat, cont);
 	},
 
 	/**
@@ -195,3 +195,8 @@ $(function() {
      controlPanel.getPresentation();	
   });
  });
+
+function example(id) {
+	$('#artid').val(id);
+    controlPanel.loadArticle();
+}
